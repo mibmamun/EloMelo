@@ -1,0 +1,132 @@
+#How to create a Windows 11 Imange with Intune Autopilot Profile
+
+Download fido script and run
+https://github.com/pbatard/Fido/blob/master/Fido.ps1
+
+
+A window will pop up. Customize the  windows and download. Save it in c:\temp
+
+Create a folder name, Image.
+Create subfolder: 
+
+Image\Drivers
+Image\Mount
+Image\Profile
+Image\WIM
+
+Also copy the autoattened.xml and BC configuration.xml to Image
+
+Mount the image. Copy install.wim file from source and save it in e:\image
+
+#This line will find how many index or version is included
+Dism /Get-WimInfo /WimFile:<path_to_install.wim>
+ 
+#This line extract only the needed image, here win pro as index 6
+Dism /Export-Image /SourceImageFile:"E:\Image\install.wim" /SourceIndex:6 /DestinationImageFile:"E:\Image\WIM\install.wim"
+ 
+#Now we need to mount that win pro image. Search google for lenovo sccm package driver. Find the correct drivers and click on install. There will be option for extract. Extract it on a folder.
+Dism /Mount-Image /ImageFile:E:\Image\WIM\install.wim /index:1 /MountDir:E:\Image\Mount\
+ 
+
+#Below we are adding several drivers on the above mounted image
+Dism /Image:E:\Image\Mount /Add-Driver /Driver:E:\Image\DRIVERS\20XK /Recurse
+ 
+#Mounting the drivers from the image
+Dism /Image:E:\Image\Mount /Get-Drivers
+ 
+#Unmounting the image and wrap it
+Dism /Unmount-Image /MountDir:E:\Image\Mount /Commit
+
+#copy the profile. But before that rename the profile as AutopilotConfigurationFile.json
+C:\Windows\system32>Dism /Mount-Image /ImageFile:E:\Image\WIM\install.wim /index:1 /MountDir:E:\Image\Mount\
+
+Deployment Image Servicing and Management tool
+Version: 10.0.22000.653
+
+Mounting image
+[==========================100.0%==========================]
+The operation completed successfully.
+
+C:\Windows\system32>copy E:\Image\Profile\AutopilotConfigurationFile.json E:\Image\Mount\Windows\Provisioning\autopilot\AutopilotConfigurationFile.json
+        1 file(s) copied.
+
+
+
+Download rufus portable. Make a bootable usb from c:\temp base image
+
+When the usb is ready then copy the install.wim file from e:\wim\install.wim to the usb\sources\install.wim
+
+
+
+
+C:\Windows\system32>Dism /Get-WimInfo /WimFile:E:\Image\install.wim
+
+Deployment Image Servicing and Management tool
+Version: 10.0.22000.653
+
+Details for image : E:\Image\install.wim
+
+Index : 1
+Name : Windows 11 Home
+Description : Windows 11 Home
+Size : 18,358,026,779 bytes
+
+Index : 2
+Name : Windows 11 Home N
+Description : Windows 11 Home N
+Size : 17,679,716,517 bytes
+
+Index : 3
+Name : Windows 11 Home Single Language
+Description : Windows 11 Home Single Language
+Size : 18,342,740,416 bytes
+
+Index : 4
+Name : Windows 11 Education
+Description : Windows 11 Education
+Size : 18,626,334,585 bytes
+
+Index : 5
+Name : Windows 11 Education N
+Description : Windows 11 Education N
+Size : 17,939,693,652 bytes
+
+Index : 6
+Name : Windows 11 Pro
+Description : Windows 11 Pro
+Size : 18,641,679,997 bytes
+
+Index : 7
+Name : Windows 11 Pro N
+Description : Windows 11 Pro N
+Size : 17,974,447,399 bytes
+
+The operation completed successfully.
+
+C:\Windows\system32>Dism /Export-Image /SourceImageFile:"E:\Image\install.wim" /SourceIndex:6 /DestinationImageFile:"E:\Image\WIM\install.wim"
+
+Deployment Image Servicing and Management tool
+Version: 10.0.22000.653
+
+Exporting image
+[==========================100.0%==========================]
+The operation completed successfully.
+
+
+C:\Windows\system32>Dism /Mount-Image /ImageFile:E:\Image\WIM\install.wim /index:1 /MountDir:E:\Image\Mount\
+
+Deployment Image Servicing and Management tool
+Version: 10.0.22000.653
+
+Mounting image
+[==========================100.0%==========================]
+The operation completed successfully.
+
+C:\Windows\system32>copy E:\Image\Profile\AutopilotConfigurationFile.json E:\Image\Mount\Windows\Provisioning\autopilot\AutopilotConfigurationFile.json
+        1 file(s) copied.
+
+C:\Windows\system32>Dism /Image:E:\Image\Mount /Add-Driver /Driver:E:\Image\DRIVERS\20XK /Recurse
+
+Deployment Image Servicing and Management tool
+Version: 10.0.22000.653
+
