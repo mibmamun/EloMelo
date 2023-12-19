@@ -1,0 +1,15 @@
+{
+    "CloudAssignedDomainJoinMethod":  0,
+    "CloudAssignedDeviceName":  "BCUS-%SERIAL%",
+    "CloudAssignedAutopilotUpdateTimeout":  1800000,
+    "CloudAssignedForcedEnrollment":  1,
+    "Version":  2049,
+    "CloudAssignedTenantId":  "bcae9493-94a9-433c-ac65-7092f8048ad1",
+    "CloudAssignedAutopilotUpdateDisabled":  1,
+    "ZtdCorrelationId":  "0c9ca925-d744-47c6-b401-7e6a9abd8e4e",
+    "Comment_File":  "Profile BC US Windows Profile",
+    "CloudAssignedAadServerData":  "{\"ZeroTouchConfig\":{\"CloudAssignedTenantUpn\":\"\",\"ForcedEnrollment\":1,\"CloudAssignedTenantDomain\":\"bankingcircleus.com\"}}",
+    "CloudAssignedOobeConfig":  1310,
+    "CloudAssignedTenantDomain":  "bankingcircleus.com",
+    "CloudAssignedLanguage":  "os-default"
+}
