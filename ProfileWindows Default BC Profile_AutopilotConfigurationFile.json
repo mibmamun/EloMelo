@@ -1,0 +1,14 @@
+{
+    "CloudAssignedTenantId":  "1eef4a4d-f7cc-4e1e-9345-5db4051d2bc1",
+    "CloudAssignedDeviceName":  "BC-%SERIAL%",
+    "CloudAssignedAutopilotUpdateTimeout":  1800000,
+    "CloudAssignedAutopilotUpdateDisabled":  1,
+    "CloudAssignedForcedEnrollment":  1,
+    "Version":  2049,
+    "Comment_File":  "Profile Windows Default BC Profile",
+    "CloudAssignedAadServerData":  "{\"ZeroTouchConfig\":{\"CloudAssignedTenantUpn\":\"\",\"ForcedEnrollment\":1,\"CloudAssignedTenantDomain\":\"saxopayments.com\"}}",
+    "CloudAssignedOobeConfig":  286,
+    "CloudAssignedDomainJoinMethod":  0,
+    "ZtdCorrelationId":  "95380b5a-2f55-45bf-9ba0-0e2f83b40b42",
+    "CloudAssignedTenantDomain":  "saxopayments.com"
+}
